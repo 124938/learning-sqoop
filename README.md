@@ -35,7 +35,7 @@ Last login: Wed Jan  3 02:59:27 2018 from 192.168.211.1
 [cloudera@quickstart ~]$
 ~~~
 
-### Step-3: Important configuration files of Sqoop
+### Step-3: Verification of sqoop binaries
 
 ~~~
 [cloudera@quickstart conf]$ cd /usr/lib/sqoop/bin/
@@ -63,6 +63,8 @@ total 88
 -rwxr-xr-x 1 root root 7486 Jun 29  2017 configure-sqoop
 ~~~
 
+### Step-4: Verification of sqoop configurations
+
 ~~~
 [cloudera@quickstart ~]$ cd /etc/sqoop/conf
 [cloudera@quickstart conf]$ ls -ltr
@@ -76,7 +78,7 @@ total 28
 [cloudera@quickstart conf]$ 
 ~~~
 
-### Step-4: Verification of Sqoop
+### Step-5: Verification of sqoop command line tool
 
 ~~~
 [cloudera@quickstart conf]$ sqoop help
