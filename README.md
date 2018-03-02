@@ -74,11 +74,9 @@ total 28
 -rwxr-xr-x 1 root root 1404 Jun 29  2017 sqoop-env-template.cmd
 -rwxr-xr-x 1 root root 3895 Jun 29  2017 oraoop-site-template.xml
 -rwxr-xr-x 1 root root 6044 Jun 29  2017 sqoop-site.xml
-
-[cloudera@quickstart conf]$ 
 ~~~
 
-### Step-5: Verification of sqoop command line tool
+### Step-5: Verification of sqoop command
 
 ~~~
 [cloudera@quickstart conf]$ sqoop help
@@ -104,6 +102,14 @@ Available commands:
   version            Display version information
 
 See 'sqoop help COMMAND' for information on a specific command.
+~~~
 
-[cloudera@quickstart conf]$ 
+~~~
+[cloudera@quickstart bin]$ sqoop version
+Warning: /usr/lib/sqoop/../accumulo does not exist! Accumulo imports will fail.
+Please set $ACCUMULO_HOME to the root of your Accumulo installation.
+18/03/02 08:28:57 INFO sqoop.Sqoop: Running Sqoop version: 1.4.6-cdh5.12.0
+Sqoop 1.4.6-cdh5.12.0
+git commit id 
+Compiled by jenkins on Thu Jun 29 04:30:40 PDT 2017
 ~~~
