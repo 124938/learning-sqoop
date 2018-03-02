@@ -79,7 +79,7 @@ total 28
 ### Step-5: Verification of sqoop command
 
 ~~~
-[cloudera@quickstart conf]$ sqoop help
+[cloudera@quickstart ~]$ sqoop help
 Warning: /usr/lib/sqoop/../accumulo does not exist! Accumulo imports will fail.
 Please set $ACCUMULO_HOME to the root of your Accumulo installation.
 18/03/02 07:15:56 INFO sqoop.Sqoop: Running Sqoop version: 1.4.6-cdh5.12.0
@@ -105,7 +105,7 @@ See 'sqoop help COMMAND' for information on a specific command.
 ~~~
 
 ~~~
-[cloudera@quickstart bin]$ sqoop version
+[cloudera@quickstart ~]$ sqoop version
 Warning: /usr/lib/sqoop/../accumulo does not exist! Accumulo imports will fail.
 Please set $ACCUMULO_HOME to the root of your Accumulo installation.
 18/03/02 08:28:57 INFO sqoop.Sqoop: Running Sqoop version: 1.4.6-cdh5.12.0
