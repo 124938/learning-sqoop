@@ -8,5 +8,6 @@
   * Sqoop uses MapReduce to import and export the data, which provides parallel operation as well as fault tolerance.
 
 * **How Sqoop Works?**
-  * Below diagram describes the workflow of Sqoop.
+  * Below diagram describes the working model of Sqoop.
+    
     ![Alt text](_images/sqoop_work.jpg?raw=true "Sqoop Working Model")  
