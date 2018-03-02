@@ -38,6 +38,32 @@ Last login: Wed Jan  3 02:59:27 2018 from 192.168.211.1
 ### Step-3: Important configuration files of Sqoop
 
 ~~~
+[cloudera@quickstart conf]$ cd /usr/lib/sqoop/bin/
+[cloudera@quickstart bin]$ ls -ltr
+total 88
+-rwxr-xr-x 1 root root 1564 Jun 29  2017 stop-metastore.sh
+-rwxr-xr-x 1 root root 3987 Jun 29  2017 start-metastore.sh
+-rwxr-xr-x 1 root root 3060 Jun 29  2017 sqoop-version
+-rwxr-xr-x 1 root root 3062 Jun 29  2017 sqoop-metastore
+-rwxr-xr-x 1 root root 3058 Jun 29  2017 sqoop-merge
+-rwxr-xr-x 1 root root 3064 Jun 29  2017 sqoop-list-tables
+-rwxr-xr-x 1 root root 3067 Jun 29  2017 sqoop-list-databases
+-rwxr-xr-x 1 root root 3056 Jun 29  2017 sqoop-job
+-rwxr-xr-x 1 root root 3069 Jun 29  2017 sqoop-import-mainframe
+-rwxr-xr-x 1 root root 3070 Jun 29  2017 sqoop-import-all-tables
+-rwxr-xr-x 1 root root 3059 Jun 29  2017 sqoop-import
+-rwxr-xr-x 1 root root 3057 Jun 29  2017 sqoop-help
+-rwxr-xr-x 1 root root 3059 Jun 29  2017 sqoop-export
+-rwxr-xr-x 1 root root 3057 Jun 29  2017 sqoop-eval
+-rwxr-xr-x 1 root root 3070 Jun 29  2017 sqoop-create-hive-table
+-rwxr-xr-x 1 root root 3060 Jun 29  2017 sqoop-codegen
+-rwxr-xr-x 1 root root 1055 Jun 29  2017 sqoop.cmd
+-rwxr-xr-x 1 root root 3133 Jun 29  2017 sqoop
+-rwxr-xr-x 1 root root 6533 Jun 29  2017 configure-sqoop.cmd
+-rwxr-xr-x 1 root root 7486 Jun 29  2017 configure-sqoop
+~~~
+
+~~~
 [cloudera@quickstart ~]$ cd /etc/sqoop/conf
 [cloudera@quickstart conf]$ ls -ltr
 total 28
