@@ -10,4 +10,13 @@
     
   ![Alt text](_images/sqoop_work.jpg?raw=true "Sqoop Working Model")  
 
+### Features
+* Connectors for all major RDBMS Databases
+* Parallel import/export
+* Import results of SQL query
+* Incremental Load
+* Full Load
+* Load data directly into HIVE/HBase
+* Compression
+
 ### Setup
