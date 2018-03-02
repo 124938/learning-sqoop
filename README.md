@@ -12,11 +12,24 @@
 
 ### Features
 * Connectors for all major RDBMS Databases
-* Parallel import/export
-* Import results of SQL query
-* Incremental Load
 * Full Load
+* Incremental Load
+* Import results of SQL query
 * Load data directly into HIVE/HBase
+* Parallel import/export
 * Compression
 
-### Setup
+## Installation/Verification
+
+### Pre-Requisite
+* Cloudera QuickStart VM should be up & running (Click [here](https://github.com/124938/learning-hadoop-vendors/tree/master/cloudera/_1_quickstart_vm/README.md) to know more details on it)
+    
+### Login to Quick Start VM or Gateway Node of hadoop cluster using `ssh`
+
+~~~
+asus@asus-GL553VD:~$ ssh cloudera@192.168.211.142
+cloudera@192.168.211.142's password: 
+Last login: Wed Jan  3 02:59:27 2018 from 192.168.211.1
+
+[cloudera@quickstart ~]$
+~~~
