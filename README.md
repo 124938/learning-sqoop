@@ -1,9 +1,31 @@
-## Sqoop List Databases
+## Introduction
 
-### Objective
-* Sqoop list-databases tool executes as well as parses the `SHOW DATABASES` query against the database server.
+### What is Sqoop?
+* Sqoop is a tool designed to transfer data between Hadoop and relational database servers. 
+* Sqoop is used to import data from RDBMS such as MySQL, Oracle to Hadoop HDFS, and export from Hadoop file system to RDBMS.
+* Sqoop uses MapReduce to import and export the data, which provides parallel operation as well as fault tolerance.
+* Sqoop named from "**SQ**L to Had**oop** & Had**oop** to **SQ**L"
 
-### Login to Quick Start VM OR Gateway Node of hadoop cluster
+### How Sqoop Works?
+* Below diagram describes the working model of Sqoop.
+    
+  ![Alt text](_images/sqoop_work.jpg?raw=true "Sqoop Working Model")  
+
+### Features
+* Connectors for all major RDBMS Databases
+* Full Load
+* Incremental Load
+* Import results of SQL query
+* Load data directly into HIVE/HBase
+* Parallel import/export
+* Compression
+
+## Configuration/Verification
+
+### Step-1: Pre-Requisite
+* Cloudera QuickStart VM should be up & running (Click [here](https://github.com/124938/learning-hadoop-vendors/tree/master/cloudera/_1_quickstart_vm/README.md) to know more details on it)
+    
+### Step-2: Login to Quick Start VM OR Gateway Node of hadoop cluster
 
 ~~~
 asus@asus-GL553VD:~$ ssh cloudera@192.168.211.142
@@ -13,101 +35,81 @@ Last login: Wed Jan  3 02:59:27 2018 from 192.168.211.1
 [cloudera@quickstart ~]$
 ~~~
 
-### Syntax
+### Step-3: Verification of sqoop binaries
 
 ~~~
-[cloudera@quickstart ~]$ sqoop list-databases --help
+[cloudera@quickstart conf]$ cd /usr/lib/sqoop/bin/
+[cloudera@quickstart bin]$ ls -ltr
+total 88
+-rwxr-xr-x 1 root root 1564 Jun 29  2017 stop-metastore.sh
+-rwxr-xr-x 1 root root 3987 Jun 29  2017 start-metastore.sh
+-rwxr-xr-x 1 root root 3060 Jun 29  2017 sqoop-version
+-rwxr-xr-x 1 root root 3062 Jun 29  2017 sqoop-metastore
+-rwxr-xr-x 1 root root 3058 Jun 29  2017 sqoop-merge
+-rwxr-xr-x 1 root root 3064 Jun 29  2017 sqoop-list-tables
+-rwxr-xr-x 1 root root 3067 Jun 29  2017 sqoop-list-databases
+-rwxr-xr-x 1 root root 3056 Jun 29  2017 sqoop-job
+-rwxr-xr-x 1 root root 3069 Jun 29  2017 sqoop-import-mainframe
+-rwxr-xr-x 1 root root 3070 Jun 29  2017 sqoop-import-all-tables
+-rwxr-xr-x 1 root root 3059 Jun 29  2017 sqoop-import
+-rwxr-xr-x 1 root root 3057 Jun 29  2017 sqoop-help
+-rwxr-xr-x 1 root root 3059 Jun 29  2017 sqoop-export
+-rwxr-xr-x 1 root root 3057 Jun 29  2017 sqoop-eval
+-rwxr-xr-x 1 root root 3070 Jun 29  2017 sqoop-create-hive-table
+-rwxr-xr-x 1 root root 3060 Jun 29  2017 sqoop-codegen
+-rwxr-xr-x 1 root root 1055 Jun 29  2017 sqoop.cmd
+-rwxr-xr-x 1 root root 3133 Jun 29  2017 sqoop
+-rwxr-xr-x 1 root root 6533 Jun 29  2017 configure-sqoop.cmd
+-rwxr-xr-x 1 root root 7486 Jun 29  2017 configure-sqoop
+~~~
+
+### Step-4: Verification of sqoop configurations
+
+~~~
+[cloudera@quickstart ~]$ cd /etc/sqoop/conf
+[cloudera@quickstart conf]$ ls -ltr
+total 28
+-rwxr-xr-x 1 root root 6044 Jun 29  2017 sqoop-site-template.xml
+-rwxr-xr-x 1 root root 1345 Jun 29  2017 sqoop-env-template.sh
+-rwxr-xr-x 1 root root 1404 Jun 29  2017 sqoop-env-template.cmd
+-rwxr-xr-x 1 root root 3895 Jun 29  2017 oraoop-site-template.xml
+-rwxr-xr-x 1 root root 6044 Jun 29  2017 sqoop-site.xml
+~~~
+
+### Step-5: Verification of sqoop command
+
+~~~
+[cloudera@quickstart ~]$ sqoop help
 Warning: /usr/lib/sqoop/../accumulo does not exist! Accumulo imports will fail.
 Please set $ACCUMULO_HOME to the root of your Accumulo installation.
-18/03/02 08:43:29 INFO sqoop.Sqoop: Running Sqoop version: 1.4.6-cdh5.12.0
-usage: sqoop list-databases [GENERIC-ARGS] [TOOL-ARGS]
+18/03/02 07:15:56 INFO sqoop.Sqoop: Running Sqoop version: 1.4.6-cdh5.12.0
+usage: sqoop COMMAND [ARGS]
 
-Common arguments:
-   --connect <jdbc-uri>                                       Specify JDBC connect string
-   --connection-manager <class-name>                          Specify connection manager class name
-   --connection-param-file <properties-file>                  Specify connection parameters file
-   --driver <class-name>                                      Manually specify JDBC driver class to use
-   --hadoop-home <hdir>                                       Override $HADOOP_MAPRED_HOME_ARG
-   --hadoop-mapred-home <dir>                                 Override $HADOOP_MAPRED_HOME_ARG
-   --help                                                     Print usage instructions
-   --metadata-transaction-isolation-level <isolationlevel>    Defines the
-                                                              transaction
-                                                              isolation
-                                                              level for
-                                                              metadata
-                                                              queries. For
-                                                              more details
-                                                              check
-                                                              java.sql.Con
-                                                              nection
-                                                              javadoc or
-                                                              the JDBC
-                                                              specificaito
-                                                              n
-   --oracle-escaping-disabled <boolean>                       Disable the
-                                                              escaping
-                                                              mechanism of
-                                                              the
-                                                              Oracle/OraOo
-                                                              p connection
-                                                              managers
--P                                                            Read
-                                                              password
-                                                              from console
-   --password <password>                                      Set
-                                                              authenticati
-                                                              on password
-   --password-alias <password-alias>                          Credential
-                                                              provider
-                                                              password
-                                                              alias
-   --password-file <password-file>                            Set
-                                                              authenticati
-                                                              on password
-                                                              file path
-   --relaxed-isolation                                        Use
-                                                              read-uncommi
-                                                              tted
-                                                              isolation
-                                                              for imports
-   --skip-dist-cache                                          Skip copying
-                                                              jars to
-                                                              distributed
-                                                              cache
-   --temporary-rootdir <rootdir>                              Defines the
-                                                              temporary
-                                                              root
-                                                              directory
-                                                              for the
-                                                              import
-   --throw-on-error                                           Rethrow a
-                                                              RuntimeExcep
-                                                              tion on
-                                                              error
-                                                              occurred
-                                                              during the
-                                                              job
-   --username <username>                                      Set
-                                                              authenticati
-                                                              on username
-   --verbose                                                  Print more
-                                                              information
-                                                              while
-                                                              working
+Available commands:
+  codegen            Generate code to interact with database records
+  create-hive-table  Import a table definition into Hive
+  eval               Evaluate a SQL statement and display the results
+  export             Export an HDFS directory to a database table
+  help               List available commands
+  import             Import a table from a database to HDFS
+  import-all-tables  Import tables from a database to HDFS
+  import-mainframe   Import datasets from a mainframe server to HDFS
+  job                Work with saved jobs
+  list-databases     List available databases on a server
+  list-tables        List available tables in a database
+  merge              Merge results of incremental imports
+  metastore          Run a standalone Sqoop metastore
+  version            Display version information
 
-Generic Hadoop command-line arguments:
-(must preceed any tool-specific arguments)
-Generic options supported are
--conf <configuration file>     specify an application configuration file
--D <property=value>            use value for given property
--fs <local|namenode:port>      specify a namenode
--jt <local|resourcemanager:port>    specify a ResourceManager
--files <comma separated list of files>    specify comma separated files to be copied to the map reduce cluster
--libjars <comma separated list of jars>    specify comma separated jar files to include in the classpath.
--archives <comma separated list of archives>    specify comma separated archives to be unarchived on the compute machines.
+See 'sqoop help COMMAND' for information on a specific command.
+~~~
 
-The general command line syntax is
-bin/hadoop command [genericOptions] [commandOptions]
-
-
+~~~
+[cloudera@quickstart ~]$ sqoop version
+Warning: /usr/lib/sqoop/../accumulo does not exist! Accumulo imports will fail.
+Please set $ACCUMULO_HOME to the root of your Accumulo installation.
+18/03/02 08:28:57 INFO sqoop.Sqoop: Running Sqoop version: 1.4.6-cdh5.12.0
+Sqoop 1.4.6-cdh5.12.0
+git commit id 
+Compiled by jenkins on Thu Jun 29 04:30:40 PDT 2017
 ~~~
