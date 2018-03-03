@@ -125,3 +125,20 @@ Generic options supported are
 The general command line syntax is
 bin/hadoop command [genericOptions] [commandOptions]
 ~~~
+
+### Example 
+
+~~~
+asus@asus-GL553VD:~$ sqoop-list-databases \
+--connect jdbc:mysql://quickstart.cloudera:3306 \
+--username retail_dba \
+--password cloudera
+
+Warning: /usr/lib/sqoop/../accumulo does not exist! Accumulo imports will fail.
+Please set $ACCUMULO_HOME to the root of your Accumulo installation.
+18/03/03 01:15:52 INFO sqoop.Sqoop: Running Sqoop version: 1.4.6-cdh5.12.0
+18/03/03 01:15:52 WARN tool.BaseSqoopTool: Setting your password on the command-line is insecure. Consider using -P instead.
+18/03/03 01:15:52 INFO manager.MySQLManager: Preparing to use a MySQL streaming resultset.
+information_schema
+retail_db
+~~~
