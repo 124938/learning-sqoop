@@ -3,6 +3,9 @@
 ### Objective
 * Sqoop import tool imports data from RDBMS to HDFS.
 
+### Life Cycle
+  ![Alt text](_images/sqoop_import_life_cycle.png?raw=true "Sqoop Import - Life Cycle")  
+
 ### Login to Quick Start VM OR Gateway Node of hadoop cluster
 
 ~~~
