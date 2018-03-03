@@ -1,7 +1,7 @@
 ## Sqoop Import
 
 ### Objective
-* Sqoop eval tool executes provided query against the database server.
+* Sqoop import tool imports data from RDBMS to HDFS.
 
 ### Login to Quick Start VM OR Gateway Node of hadoop cluster
 
