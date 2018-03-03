@@ -129,9 +129,9 @@ The general command line syntax is
 bin/hadoop command [genericOptions] [commandOptions]
 ~~~
 
-### Examples
+## Examples
 
-**(1) Execute `SELECT` query:**
+### (1) Execute `SELECT` query:**
 
 ~~~
 asus@asus-GL553VD:~$ sqoop-eval \
@@ -157,7 +157,7 @@ Please set $ACCUMULO_HOME to the root of your Accumulo installation.
 --------------------------------------
 ~~~
 
-**(2) Execute `CREATE TABLE` query (DDL statement):**
+### (2) Execute `CREATE TABLE` query (DDL statement):**
 
 ~~~
 asus@asus-GL553VD:~$ sqoop-eval \
@@ -199,7 +199,7 @@ Please set $ACCUMULO_HOME to the root of your Accumulo installation.
 ------------------------
 ~~~
 
-**(3) Execute `INSERT` query (DML statement):**
+### (3) Execute `INSERT` query (DML statement):**
 
 ~~~
 asus@asus-GL553VD:~$ sqoop-eval \
@@ -235,7 +235,7 @@ Please set $ACCUMULO_HOME to the root of your Accumulo installation.
 ---------------
 ~~~
 
-**(4) Execute `DROP TABLE` query (DDL statement):**
+### (4) Execute `DROP TABLE` query (DDL statement):**
 
 ~~~
 asus@asus-GL553VD:~$ sqoop-eval \

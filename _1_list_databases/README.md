@@ -126,7 +126,9 @@ The general command line syntax is
 bin/hadoop command [genericOptions] [commandOptions]
 ~~~
 
-### Example 
+## Example 
+
+### List down all databases 
 
 ~~~
 asus@asus-GL553VD:~$ sqoop-list-databases \

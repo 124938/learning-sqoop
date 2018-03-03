@@ -127,7 +127,9 @@ bin/hadoop command [genericOptions] [commandOptions]
 
 ~~~
 
-### Example 
+## Example 
+
+### List down all tables 
 
 ~~~
 asus@asus-GL553VD:~$ sqoop-list-tables \
