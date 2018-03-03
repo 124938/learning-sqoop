@@ -3,10 +3,6 @@
 ### Objective
 * Sqoop import tool imports data from RDBMS to HDFS.
 
-### Life Cycle
-  
-  ![Alt text](_images/sqoop_import_life_cycle.png?raw=true "Sqoop Import - Life Cycle")  
-
 ### Login to Quick Start VM OR Gateway Node of hadoop cluster
 
 ~~~
@@ -521,3 +517,6 @@ Found 5 items
 -rw-r--r--   1 cloudera cloudera     752940 2018-03-03 07:52 /user/cloudera/sqoop_import/orders/part-m-00003
 ~~~
 
+* Life Cycle
+  
+  ![Alt text](_images/sqoop_import_life_cycle.png?raw=true "Sqoop Import - Life Cycle")  
