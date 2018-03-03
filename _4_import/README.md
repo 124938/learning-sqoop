@@ -504,6 +504,12 @@ Note: Recompile with -Xlint:deprecation for details.
 18/03/03 07:52:55 INFO mapreduce.ImportJobBase: Retrieved 68883 records.
 ~~~
 
+* Verify map reduce job
+
+~~~
+http://quickstart.cloudera:8088/proxy/application_1514521302404_0009/
+~~~
+
 * Verify orders data under HDFS
 
 ~~~
