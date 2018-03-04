@@ -411,7 +411,7 @@ Arguments to mysqldump and other subprograms may be supplied
 after a '--' on the command line.
 ~~~
 
-## Examples
+## Examples - Import data from table (primary key present in table)
 
 ### Pre-Requisite
 
@@ -423,9 +423,10 @@ after a '--' on the command line.
 drwxr-xr-x   - cloudera cloudera          0 2018-03-04 04:35 /user/cloudera/sqoop_import/retail_db
 ~~~
 
-### Import table - Using --target-dir
+### Usage of --target-dir
 
-* --target-dir should work only in case of directory is not available in HDFS
+* Notes:
+  * --target-dir should work only in case of directory is not available in HDFS
 
 * Import orders table from MySQL to HDFS
 
@@ -531,9 +532,10 @@ http://quickstart.cloudera:8088/proxy/application_1514521302404_0010/
 -rw-r--r--   1 cloudera cloudera     752940 2018-03-04 04:39 /user/cloudera/sqoop_import/retail_db/orders/part-m-00003
 ~~~
 
-### Import table - Using --target-dir with --delete-target-dir
+### Usage of --target-dir with --delete-target-dir
 
-* --delete-target-dir make sure to delete --target-dir under HDFS before importing table data
+* Notes:
+  * --delete-target-dir make sure to delete --target-dir under HDFS before importing table data
 
 * Import orders table from MySQL to HDFS
 
@@ -641,9 +643,10 @@ http://quickstart.cloudera:8088/proxy/application_1514521302404_0011/
 -rw-r--r--   1 cloudera cloudera     752940 2018-03-04 04:47 /user/cloudera/sqoop_import/retail_db/orders/part-m-00003
 ~~~
 
-### Import table - Using --warehouse-dir
+### Usage of --warehouse-dir
 
-* --warehouse-dir make sure to create directory under HDFS with name provided in --table clause
+* Notes:
+  * --warehouse-dir make sure to create directory under HDFS with name provided in --table clause
 
 * Remove orders directory from HDFS
 
@@ -756,3 +759,196 @@ http://quickstart.cloudera:8088/proxy/application_1514521302404_0013/
 -rw-r--r--   1 cloudera cloudera     752368 2018-03-04 05:20 /user/cloudera/sqoop_import/retail_db/orders/part-m-00002
 -rw-r--r--   1 cloudera cloudera     752940 2018-03-04 05:20 /user/cloudera/sqoop_import/retail_db/orders/part-m-00003
 ~~~
+
+### Usage of --num-mappers
+
+* Notes:
+  * Import command generate 4 files under HDFS because default value of --num-mappers is 4, this can be override by specifying --num-mappers value in command 
+
+* Remove orders directory from HDFS
+
+~~~
+[cloudera@quickstart ~]$ hadoop fs -rm -R /user/cloudera/sqoop_import/retail_db/orders
+Deleted /user/cloudera/sqoop_import/retail_db/orders
+~~~
+
+* Import orders table from MySQL to HDFS
+
+~~~
+asus@asus-GL553VD:~$ sqoop-import \
+--connect jdbc:mysql://quickstart.cloudera:3306/retail_db \
+--username retail_dba \
+--password cloudera \
+--table orders \
+--target-dir /user/cloudera/sqoop_import/retail_db/orders \
+--num-mappers 1
+
+Warning: /usr/lib/sqoop/../accumulo does not exist! Accumulo imports will fail.
+Please set $ACCUMULO_HOME to the root of your Accumulo installation.
+18/03/04 05:39:29 INFO sqoop.Sqoop: Running Sqoop version: 1.4.6-cdh5.12.0
+18/03/04 05:39:29 WARN tool.BaseSqoopTool: Setting your password on the command-line is insecure. Consider using -P instead.
+18/03/04 05:39:29 INFO manager.MySQLManager: Preparing to use a MySQL streaming resultset.
+18/03/04 05:39:29 INFO tool.CodeGenTool: Beginning code generation
+18/03/04 05:39:29 INFO manager.SqlManager: Executing SQL statement: SELECT t.* FROM `orders` AS t LIMIT 1
+18/03/04 05:39:29 INFO manager.SqlManager: Executing SQL statement: SELECT t.* FROM `orders` AS t LIMIT 1
+18/03/04 05:39:29 INFO orm.CompilationManager: HADOOP_MAPRED_HOME is /usr/lib/hadoop-mapreduce
+Note: /tmp/sqoop-cloudera/compile/feff37d20971cdc0ee49a4da6e26ab4f/orders.java uses or overrides a deprecated API.
+Note: Recompile with -Xlint:deprecation for details.
+18/03/04 05:39:31 INFO orm.CompilationManager: Writing jar file: /tmp/sqoop-cloudera/compile/feff37d20971cdc0ee49a4da6e26ab4f/orders.jar
+18/03/04 05:39:31 WARN manager.MySQLManager: It looks like you are importing from mysql.
+18/03/04 05:39:31 WARN manager.MySQLManager: This transfer can be faster! Use the --direct
+18/03/04 05:39:31 WARN manager.MySQLManager: option to exercise a MySQL-specific fast path.
+18/03/04 05:39:31 INFO manager.MySQLManager: Setting zero DATETIME behavior to convertToNull (mysql)
+18/03/04 05:39:31 INFO mapreduce.ImportJobBase: Beginning import of orders
+18/03/04 05:39:31 INFO Configuration.deprecation: mapred.job.tracker is deprecated. Instead, use mapreduce.jobtracker.address
+18/03/04 05:39:31 INFO Configuration.deprecation: mapred.jar is deprecated. Instead, use mapreduce.job.jar
+18/03/04 05:39:31 INFO Configuration.deprecation: mapred.map.tasks is deprecated. Instead, use mapreduce.job.maps
+18/03/04 05:39:31 INFO client.RMProxy: Connecting to ResourceManager at /0.0.0.0:8032
+18/03/04 05:39:32 INFO db.DBInputFormat: Using read commited transaction isolation
+18/03/04 05:39:32 INFO mapreduce.JobSubmitter: number of splits:1
+18/03/04 05:39:32 INFO mapreduce.JobSubmitter: Submitting tokens for job: job_1514521302404_0014
+18/03/04 05:39:33 INFO impl.YarnClientImpl: Submitted application application_1514521302404_0014
+18/03/04 05:39:33 INFO mapreduce.Job: The url to track the job: http://quickstart.cloudera:8088/proxy/application_1514521302404_0014/
+18/03/04 05:39:33 INFO mapreduce.Job: Running job: job_1514521302404_0014
+18/03/04 05:39:38 INFO mapreduce.Job: Job job_1514521302404_0014 running in uber mode : false
+18/03/04 05:39:38 INFO mapreduce.Job:  map 0% reduce 0%
+18/03/04 05:39:44 INFO mapreduce.Job:  map 100% reduce 0%
+18/03/04 05:39:44 INFO mapreduce.Job: Job job_1514521302404_0014 completed successfully
+18/03/04 05:39:44 INFO mapreduce.Job: Counters: 30
+  File System Counters
+    FILE: Number of bytes read=0
+    FILE: Number of bytes written=151669
+    FILE: Number of read operations=0
+    FILE: Number of large read operations=0
+    FILE: Number of write operations=0
+    HDFS: Number of bytes read=87
+    HDFS: Number of bytes written=2999944
+    HDFS: Number of read operations=4
+    HDFS: Number of large read operations=0
+    HDFS: Number of write operations=2
+  Job Counters 
+    Launched map tasks=1
+    Other local map tasks=1
+    Total time spent by all maps in occupied slots (ms)=3077
+    Total time spent by all reduces in occupied slots (ms)=0
+    Total time spent by all map tasks (ms)=3077
+    Total vcore-milliseconds taken by all map tasks=3077
+    Total megabyte-milliseconds taken by all map tasks=3150848
+  Map-Reduce Framework
+    Map input records=68883
+    Map output records=68883
+    Input split bytes=87
+    Spilled Records=0
+    Failed Shuffles=0
+    Merged Map outputs=0
+    GC time elapsed (ms)=26
+    CPU time spent (ms)=3000
+    Physical memory (bytes) snapshot=289284096
+    Virtual memory (bytes) snapshot=1579343872
+    Total committed heap usage (bytes)=244842496
+  File Input Format Counters 
+    Bytes Read=0
+  File Output Format Counters 
+    Bytes Written=2999944
+18/03/04 05:39:44 INFO mapreduce.ImportJobBase: Transferred 2.861 MB in 12.7538 seconds (229.7073 KB/sec)
+18/03/04 05:39:44 INFO mapreduce.ImportJobBase: Retrieved 68883 records.
+~~~
+
+* Verify map reduce job
+
+~~~
+http://quickstart.cloudera:8088/proxy/application_1514521302404_0014/
+~~~
+
+* Verify orders data under HDFS
+
+~~~
+[cloudera@quickstart ~]$ hadoop fs -ls -h -R /user/cloudera/sqoop_import/retail_db/orders
+
+-rw-r--r--   1 cloudera cloudera          0 2018-03-04 05:39 /user/cloudera/sqoop_import/retail_db/orders/_SUCCESS
+-rw-r--r--   1 cloudera cloudera      2.9 M 2018-03-04 05:39 /user/cloudera/sqoop_import/retail_db/orders/part-m-00000
+~~~
+
+## Examples - Import data from table (primary key NOT present in table)
+
+### Pre-Requisite
+
+* Login to mysql
+
+~~~
+[cloudera@quickstart ~]$ mysql -h quickstart.cloudera -u retail_dba -p
+Enter password: 
+Welcome to the MySQL monitor.  Commands end with ; or \g.
+Your MySQL connection id is 155
+Server version: 5.1.73 Source distribution
+
+Copyright (c) 2000, 2013, Oracle and/or its affiliates. All rights reserved.
+
+Oracle is a registered trademark of Oracle Corporation and/or its
+affiliates. Other names may be trademarks of their respective
+owners.
+
+Type 'help;' or '\h' for help. Type '\c' to clear the current input statement.
+
+mysql> use retail_db;
+Reading table information for completion of table and column names
+You can turn off this feature to get a quicker startup with -A
+
+Database changed
+~~~
+
+* Create table without primary key
+
+~~~
+mysql> create table order_items_nopk as select * from order_items;
+Query OK, 172198 rows affected (0.77 sec)
+Records: 172198  Duplicates: 0  Warnings: 0
+
+mysql> describe order_items_nopk;
++--------------------------+------------+------+-----+---------+-------+
+| Field                    | Type       | Null | Key | Default | Extra |
++--------------------------+------------+------+-----+---------+-------+
+| order_item_id            | int(11)    | NO   |     | 0       |       |
+| order_item_order_id      | int(11)    | NO   |     | NULL    |       |
+| order_item_product_id    | int(11)    | NO   |     | NULL    |       |
+| order_item_quantity      | tinyint(4) | NO   |     | NULL    |       |
+| order_item_subtotal      | float      | NO   |     | NULL    |       |
+| order_item_product_price | float      | NO   |     | NULL    |       |
++--------------------------+------------+------+-----+---------+-------+
+6 rows in set (0.00 sec)
+~~~
+
+### Sample import of table which does not contain primary key
+
+* Import order_items_nopk table from MySQL to HDFS
+
+~~~
+asus@asus-GL553VD:~$ sqoop-import \
+--connect jdbc:mysql://quickstart.cloudera:3306/retail_db \
+--username retail_dba \
+--password cloudera \
+--table order_items_nopk \
+--warehouse-dir /user/cloudera/sqoop_import/retail_db
+
+Warning: /usr/lib/sqoop/../accumulo does not exist! Accumulo imports will fail.
+Please set $ACCUMULO_HOME to the root of your Accumulo installation.
+18/03/04 06:09:56 INFO sqoop.Sqoop: Running Sqoop version: 1.4.6-cdh5.12.0
+18/03/04 06:09:56 WARN tool.BaseSqoopTool: Setting your password on the command-line is insecure. Consider using -P instead.
+18/03/04 06:09:56 INFO manager.MySQLManager: Preparing to use a MySQL streaming resultset.
+18/03/04 06:09:56 INFO tool.CodeGenTool: Beginning code generation
+18/03/04 06:09:56 INFO manager.SqlManager: Executing SQL statement: SELECT t.* FROM `order_items_nopk` AS t LIMIT 1
+18/03/04 06:09:56 INFO manager.SqlManager: Executing SQL statement: SELECT t.* FROM `order_items_nopk` AS t LIMIT 1
+18/03/04 06:09:56 INFO orm.CompilationManager: HADOOP_MAPRED_HOME is /usr/lib/hadoop-mapreduce
+Note: /tmp/sqoop-cloudera/compile/cb70bccfbeb5ee447f5372986de5f993/order_items_nopk.java uses or overrides a deprecated API.
+Note: Recompile with -Xlint:deprecation for details.
+18/03/04 06:09:57 INFO orm.CompilationManager: Writing jar file: /tmp/sqoop-cloudera/compile/cb70bccfbeb5ee447f5372986de5f993/order_items_nopk.jar
+18/03/04 06:09:57 WARN manager.MySQLManager: It looks like you are importing from mysql.
+18/03/04 06:09:57 WARN manager.MySQLManager: This transfer can be faster! Use the --direct
+18/03/04 06:09:57 WARN manager.MySQLManager: option to exercise a MySQL-specific fast path.
+18/03/04 06:09:57 INFO manager.MySQLManager: Setting zero DATETIME behavior to convertToNull (mysql)
+18/03/04 06:09:57 ERROR tool.ImportTool: Import failed: No primary key could be found for table order_items_nopk. Please specify one with --split-by or perform a sequential import with '-m 1'.
+~~~
+
+* Notes:
+  * Above command is getting failed due to primary key is not present on table
+
