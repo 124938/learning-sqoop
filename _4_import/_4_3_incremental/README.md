@@ -208,7 +208,10 @@ http://quickstart.cloudera:8088/proxy/application_1514521302404_0027/
 -rw-r--r--   1 cloudera cloudera     36.8 K 2018-03-10 04:51 /user/cloudera/sqoop_import/retail_db/orders/part-m-00003
 ~~~
 
-### Approach -> 3 : Usage of --table with --check-column, --incremental & --last-value
+### Approach -> 3 : Usage of --table with --check-column, --incremental & --last-value (New records only)
+
+* **Important Notes:**
+  * --incremental append means only new records will get imported to HDFS
 
 * Import orders table with greater then `28-Feb-2014` data from MySQL to HDFS 
 
@@ -325,4 +328,248 @@ http://quickstart.cloudera:8088/proxy/application_1514521302404_0028/
 -rw-r--r--   1 cloudera cloudera     36.8 K 2018-03-10 04:51 /user/cloudera/sqoop_import/retail_db/orders/part-m-00003
 -rw-r--r--   1 cloudera cloudera    711.3 K 2018-03-10 05:31 /user/cloudera/sqoop_import/retail_db/orders/part-m-00004
 -rw-r--r--   1 cloudera cloudera    427.5 K 2018-03-10 05:31 /user/cloudera/sqoop_import/retail_db/orders/part-m-00005
+~~~
+
+### Approach -> 4 : Usage of --table with --check-column, --incremental, --last-value & --merge-key (New & Updated records)
+
+* **Important Notes:**
+  * --incremental lastmodified means only new & updated records will get imported to HDFS
+
+* **Login to MySql:**
+~~~
+[cloudera@quickstart ~]$ mysql -h quickstart.cloudera -u retail_dba -p
+Enter password: 
+Welcome to the MySQL monitor.  Commands end with ; or \g.
+Your MySQL connection id is 434
+Server version: 5.1.73 Source distribution
+
+Copyright (c) 2000, 2013, Oracle and/or its affiliates. All rights reserved.
+
+Oracle is a registered trademark of Oracle Corporation and/or its
+affiliates. Other names may be trademarks of their respective
+owners.
+
+Type 'help;' or '\h' for help. Type '\c' to clear the current input statement.
+
+mysql> use retail_db;
+Reading table information for completion of table and column names
+You can turn off this feature to get a quicker startup with -A
+
+Database changed
+mysql> create table ticker(
+ id int not null auto_increment,
+ name varchar(100) not null,
+ price float not null,
+ last_updated_at DATETIME not null,
+ primary key (id)
+);
+
+mysql>insert into ticker (name, price, last_updated_at) values ('T1', 10.20, '2018-01-01 01:01:01');
+insert into ticker (name, price, last_updated_at) values ('T2', 20.40, '2018-01-01 01:01:01');
+insert into ticker (name, price, last_updated_at) values ('T3', 25.65, '2018-01-02 01:01:01');
+insert into ticker (name, price, last_updated_at) values ('T4', 15.20, '2018-01-03 01:01:01');
+insert into ticker (name, price, last_updated_at) values ('T5', 45.40, '2018-01-04 01:01:01');
+insert into ticker (name, price, last_updated_at) values ('T6', 87.65, '2018-01-05 01:01:01');
+
+mysql> select * from ticker;
++----+------+-------+---------------------+
+| id | name | price | last_updated_at     |
++----+------+-------+---------------------+
+|  1 | T1   |  10.2 | 2018-01-01 01:01:01 |
+|  2 | T2   |  20.4 | 2018-01-01 01:01:01 |
+|  3 | T3   | 25.65 | 2018-01-02 01:01:01 |
+|  4 | T4   |  15.2 | 2018-01-03 01:01:01 |
+|  5 | T5   |  45.4 | 2018-01-04 01:01:01 |
+|  6 | T6   | 87.65 | 2018-01-05 01:01:01 |
++----+------+-------+---------------------+
+~~~
+
+* Import ticker table with greater then `2018-01-03 00:00:00` data from MySQL to HDFS 
+
+~~~
+[cloudera@quickstart ~]$ sqoop-import \
+--connect jdbc:mysql://quickstart.cloudera:3306/retail_db \
+--username retail_dba \
+--password cloudera \
+--table ticker \
+--check-column last_updated_at \
+--incremental lastmodified \
+--last-value '2018-01-03 00:00:00' \
+--merge-key id \
+--target-dir /user/cloudera/sqoop_import/retail_db/ticker \
+--num-mappers 2
+
+Warning: /usr/lib/sqoop/../accumulo does not exist! Accumulo imports will fail.
+Please set $ACCUMULO_HOME to the root of your Accumulo installation.
+18/03/11 07:57:20 INFO sqoop.Sqoop: Running Sqoop version: 1.4.6-cdh5.12.0
+18/03/11 07:57:20 WARN tool.BaseSqoopTool: Setting your password on the command-line is insecure. Consider using -P instead.
+18/03/11 07:57:20 INFO manager.MySQLManager: Preparing to use a MySQL streaming resultset.
+18/03/11 07:57:20 INFO tool.CodeGenTool: Beginning code generation
+18/03/11 07:57:20 INFO manager.SqlManager: Executing SQL statement: SELECT t.* FROM `ticker` AS t LIMIT 1
+18/03/11 07:57:20 INFO manager.SqlManager: Executing SQL statement: SELECT t.* FROM `ticker` AS t LIMIT 1
+18/03/11 07:57:20 INFO orm.CompilationManager: HADOOP_MAPRED_HOME is /usr/lib/hadoop-mapreduce
+Note: /tmp/sqoop-cloudera/compile/486a933b861bfae8e8a43841ce8a7354/ticker.java uses or overrides a deprecated API.
+Note: Recompile with -Xlint:deprecation for details.
+18/03/11 07:57:21 INFO orm.CompilationManager: Writing jar file: /tmp/sqoop-cloudera/compile/486a933b861bfae8e8a43841ce8a7354/ticker.jar
+18/03/11 07:57:22 INFO manager.SqlManager: Executing SQL statement: SELECT t.* FROM `ticker` AS t LIMIT 1
+18/03/11 07:57:22 INFO tool.ImportTool: Incremental import based on column `last_updated_at`
+18/03/11 07:57:22 INFO tool.ImportTool: Lower bound value: '2018-01-03 00:00:00'
+18/03/11 07:57:22 INFO tool.ImportTool: Upper bound value: '2018-03-11 07:57:22.0'
+18/03/11 07:57:22 WARN manager.MySQLManager: It looks like you are importing from mysql.
+18/03/11 07:57:22 WARN manager.MySQLManager: This transfer can be faster! Use the --direct
+18/03/11 07:57:22 WARN manager.MySQLManager: option to exercise a MySQL-specific fast path.
+18/03/11 07:57:22 INFO manager.MySQLManager: Setting zero DATETIME behavior to convertToNull (mysql)
+18/03/11 07:57:22 INFO mapreduce.ImportJobBase: Beginning import of ticker
+18/03/11 07:57:22 INFO Configuration.deprecation: mapred.job.tracker is deprecated. Instead, use mapreduce.jobtracker.address
+18/03/11 07:57:22 INFO Configuration.deprecation: mapred.jar is deprecated. Instead, use mapreduce.job.jar
+18/03/11 07:57:22 INFO Configuration.deprecation: mapred.map.tasks is deprecated. Instead, use mapreduce.job.maps
+18/03/11 07:57:22 INFO client.RMProxy: Connecting to ResourceManager at /0.0.0.0:8032
+18/03/11 07:57:23 INFO db.DBInputFormat: Using read commited transaction isolation
+18/03/11 07:57:23 INFO db.DataDrivenDBInputFormat: BoundingValsQuery: SELECT MIN(`id`), MAX(`id`) FROM `ticker` WHERE ( `last_updated_at` >= '2018-01-03 00:00:00' AND `last_updated_at` < '2018-03-11 07:57:22.0' )
+18/03/11 07:57:23 INFO db.IntegerSplitter: Split size: 1; Num splits: 2 from: 4 to: 6
+18/03/11 07:57:23 INFO mapreduce.JobSubmitter: number of splits:3
+18/03/11 07:57:23 INFO mapreduce.JobSubmitter: Submitting tokens for job: job_1514521302404_0059
+18/03/11 07:57:23 INFO impl.YarnClientImpl: Submitted application application_1514521302404_0059
+18/03/11 07:57:23 INFO mapreduce.Job: The url to track the job: http://quickstart.cloudera:8088/proxy/application_1514521302404_0059/
+18/03/11 07:57:23 INFO mapreduce.Job: Running job: job_1514521302404_0059
+18/03/11 07:57:30 INFO mapreduce.Job: Job job_1514521302404_0059 running in uber mode : false
+18/03/11 07:57:30 INFO mapreduce.Job:  map 0% reduce 0%
+18/03/11 07:57:36 INFO mapreduce.Job:  map 33% reduce 0%
+18/03/11 07:57:37 INFO mapreduce.Job:  map 100% reduce 0%
+18/03/11 07:57:37 INFO mapreduce.Job: Job job_1514521302404_0059 completed successfully
+18/03/11 07:57:37 INFO mapreduce.Job: Counters: 31
+    File System Counters
+        FILE: Number of bytes read=0
+        FILE: Number of bytes written=457725
+        FILE: Number of read operations=0
+        FILE: Number of large read operations=0
+        FILE: Number of write operations=0
+        HDFS: Number of bytes read=295
+        HDFS: Number of bytes written=97
+        HDFS: Number of read operations=12
+        HDFS: Number of large read operations=0
+        HDFS: Number of write operations=6
+    Job Counters 
+        Killed map tasks=1
+        Launched map tasks=3
+        Other local map tasks=3
+        Total time spent by all maps in occupied slots (ms)=10757
+        Total time spent by all reduces in occupied slots (ms)=0
+        Total time spent by all map tasks (ms)=10757
+        Total vcore-milliseconds taken by all map tasks=10757
+        Total megabyte-milliseconds taken by all map tasks=11015168
+    Map-Reduce Framework
+        Map input records=3
+        Map output records=3
+        Input split bytes=295
+        Spilled Records=0
+        Failed Shuffles=0
+        Merged Map outputs=0
+        GC time elapsed (ms)=86
+        CPU time spent (ms)=2940
+        Physical memory (bytes) snapshot=639643648
+        Virtual memory (bytes) snapshot=4733132800
+        Total committed heap usage (bytes)=662175744
+    File Input Format Counters 
+        Bytes Read=0
+    File Output Format Counters 
+        Bytes Written=97
+18/03/11 07:57:37 INFO mapreduce.ImportJobBase: Transferred 97 bytes in 14.7105 seconds (6.5939 bytes/sec)
+18/03/11 07:57:37 INFO mapreduce.ImportJobBase: Retrieved 3 records.
+18/03/11 07:57:37 INFO tool.ImportTool: Final destination exists, will run merge job.
+18/03/11 07:57:37 INFO Configuration.deprecation: mapred.job.tracker is deprecated. Instead, use mapreduce.jobtracker.address
+18/03/11 07:57:37 WARN mapreduce.ExportJobBase: IOException checking input file header: java.io.EOFException
+18/03/11 07:57:37 INFO Configuration.deprecation: mapred.output.key.class is deprecated. Instead, use mapreduce.job.output.key.class
+18/03/11 07:57:37 INFO client.RMProxy: Connecting to ResourceManager at /0.0.0.0:8032
+18/03/11 07:57:37 INFO input.FileInputFormat: Total input paths to process : 4
+18/03/11 07:57:38 INFO mapreduce.JobSubmitter: number of splits:4
+18/03/11 07:57:38 INFO mapreduce.JobSubmitter: Submitting tokens for job: job_1514521302404_0060
+18/03/11 07:57:38 INFO impl.YarnClientImpl: Submitted application application_1514521302404_0060
+18/03/11 07:57:38 INFO mapreduce.Job: The url to track the job: http://quickstart.cloudera:8088/proxy/application_1514521302404_0060/
+18/03/11 07:57:38 INFO mapreduce.Job: Running job: job_1514521302404_0060
+18/03/11 07:57:43 INFO mapreduce.Job: Job job_1514521302404_0060 running in uber mode : false
+18/03/11 07:57:43 INFO mapreduce.Job:  map 0% reduce 0%
+18/03/11 07:57:49 INFO mapreduce.Job:  map 25% reduce 0%
+18/03/11 07:57:50 INFO mapreduce.Job:  map 50% reduce 0%
+18/03/11 07:57:51 INFO mapreduce.Job:  map 75% reduce 0%
+18/03/11 07:57:52 INFO mapreduce.Job:  map 100% reduce 0%
+18/03/11 07:57:54 INFO mapreduce.Job:  map 100% reduce 100%
+18/03/11 07:57:54 INFO mapreduce.Job: Job job_1514521302404_0060 completed successfully
+18/03/11 07:57:54 INFO mapreduce.Job: Counters: 51
+    File System Counters
+        FILE: Number of bytes read=123
+        FILE: Number of bytes written=764145
+        FILE: Number of read operations=0
+        FILE: Number of large read operations=0
+        FILE: Number of write operations=0
+        HDFS: Number of bytes read=760
+        HDFS: Number of bytes written=97
+        HDFS: Number of read operations=15
+        HDFS: Number of large read operations=0
+        HDFS: Number of write operations=2
+    Job Counters 
+        Killed map tasks=1
+        Launched map tasks=4
+        Launched reduce tasks=1
+        Other local map tasks=1
+        Data-local map tasks=3
+        Total time spent by all maps in occupied slots (ms)=10775
+        Total time spent by all reduces in occupied slots (ms)=2345
+        Total time spent by all map tasks (ms)=10775
+        Total time spent by all reduce tasks (ms)=2345
+        Total vcore-milliseconds taken by all map tasks=10775
+        Total vcore-milliseconds taken by all reduce tasks=2345
+        Total megabyte-milliseconds taken by all map tasks=11033600
+        Total megabyte-milliseconds taken by all reduce tasks=2401280
+    Map-Reduce Framework
+        Map input records=3
+        Map output records=3
+        Map output bytes=111
+        Map output materialized bytes=141
+        Input split bytes=663
+        Combine input records=0
+        Combine output records=0
+        Reduce input groups=3
+        Reduce shuffle bytes=141
+        Reduce input records=3
+        Reduce output records=3
+        Spilled Records=6
+        Shuffled Maps =4
+        Failed Shuffles=0
+        Merged Map outputs=4
+        GC time elapsed (ms)=135
+        CPU time spent (ms)=2350
+        Physical memory (bytes) snapshot=1367683072
+        Virtual memory (bytes) snapshot=7850708992
+        Total committed heap usage (bytes)=1323302912
+    Shuffle Errors
+        BAD_ID=0
+        CONNECTION=0
+        IO_ERROR=0
+        WRONG_LENGTH=0
+        WRONG_MAP=0
+        WRONG_REDUCE=0
+    File Input Format Counters 
+        Bytes Read=97
+    File Output Format Counters 
+        Bytes Written=97
+18/03/11 07:57:54 INFO tool.ImportTool: Incremental import complete! To run another incremental import of all data following this import, supply the following arguments:
+18/03/11 07:57:54 INFO tool.ImportTool:  --incremental lastmodified
+18/03/11 07:57:54 INFO tool.ImportTool:   --check-column last_updated_at
+18/03/11 07:57:54 INFO tool.ImportTool:   --last-value 2018-03-11 07:57:22.0
+18/03/11 07:57:54 INFO tool.ImportTool: (Consider saving this with 'sqoop job --create')
+~~~
+
+* Verify ticker data under HDFS
+
+~~~
+[cloudera@quickstart ~]$ hadoop fs -ls /user/cloudera/sqoop_import/retail_db/ticker
+Found 2 items
+-rw-r--r--   1 cloudera cloudera          0 2018-03-11 07:57 /user/cloudera/sqoop_import/retail_db/ticker/_SUCCESS
+-rw-r--r--   1 cloudera cloudera         97 2018-03-11 07:57 /user/cloudera/sqoop_import/retail_db/ticker/part-r-00000
+
+[cloudera@quickstart ~]$ hadoop fs -cat /user/cloudera/sqoop_import/retail_db/ticker/part-r-00000
+4,T4,15.2,2018-01-03 01:01:01.0
+5,T5,45.4,2018-01-04 01:01:01.0
+6,T6,87.65,2018-01-05 01:01:01.0
 ~~~
