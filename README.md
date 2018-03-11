@@ -23,9 +23,9 @@
 ## Pre-Requisite
 * Cloudera QuickStart VM should be up & running (Click [here](https://github.com/124938/learning-hadoop-vendors/tree/master/cloudera/_1_quickstart_vm/README.md) to know more details on it)
 
-### Verification
+## Verification
  
-* **Step-1: Login to Quick Start VM OR Gateway Node of hadoop cluster**
+### Step-1: Login to Quick Start VM OR Gateway Node of hadoop cluster
 
 ~~~
 asus@asus-GL553VD:~$ ssh cloudera@192.168.211.142
@@ -35,7 +35,7 @@ Last login: Wed Jan  3 02:59:27 2018 from 192.168.211.1
 [cloudera@quickstart ~]$
 ~~~
 
-* **Step-2: Verification of sqoop binaries**
+### Step-2: Verification of sqoop binaries
 
 ~~~
 [cloudera@quickstart conf]$ cd /usr/lib/sqoop/bin/
@@ -63,7 +63,7 @@ total 88
 -rwxr-xr-x 1 root root 7486 Jun 29  2017 configure-sqoop
 ~~~
 
-* **Step-3: Verification of sqoop configurations**
+### Step-3: Verification of sqoop configurations
 
 ~~~
 [cloudera@quickstart ~]$ cd /etc/sqoop/conf
@@ -76,7 +76,7 @@ total 28
 -rwxr-xr-x 1 root root 6044 Jun 29  2017 sqoop-site.xml
 ~~~
 
-* **Step-4: Verification of sqoop command**
+### Step-4: Verification of sqoop command
 
 ~~~
 [cloudera@quickstart ~]$ sqoop help
