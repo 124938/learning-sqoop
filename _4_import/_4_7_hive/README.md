@@ -1,5 +1,8 @@
 ## Examples - Import data into Hive
 
+### Important Notes:
+* Importing data from RDBMS to external hive table is not supported
+
 ### Pre-Requisite
 
 * Create database in Hive
