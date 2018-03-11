@@ -1,4 +1,4 @@
-## Sqoop Import
+## Sqoop Import All Tables
 
 ### Objective
 * Sqoop import all tables tool imports data of all tables from RDBMS to HDFS.
