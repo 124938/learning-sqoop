@@ -1,5 +1,21 @@
 ## Introduction
 
+### Typical life cycle of data processing in hadoop world
+* Data Ingestion - Few most popular tools used to ingest data from different sources to hadoop file system (HDFS) are:
+  * Sqoop
+  * Flume
+  * Kafka
+* Data Processing - Followings are few popular framework/tools/technology used to process data in batch/stream fashion:
+  * Map Reduce
+  * Spark
+  * Flink
+  * Storm
+* Data Visulization - Below are few most popular BI/Reporting tools use to get insight on processed data are:
+  * Tableau
+  * Qlikview
+* Data Exporting
+  * Many times processed data gets exported to RDBMS or No-SQL database, for which sqoop is getting used 
+
 ### What is Sqoop?
 * Sqoop is a tool designed to transfer data between Hadoop and relational database servers. 
 * Sqoop is used to import data from RDBMS such as MySQL, Oracle to Hadoop HDFS, and export from Hadoop file system to RDBMS.
