@@ -13,8 +13,8 @@
 * Data Visulization - Below are few most popular BI/Reporting tools use to get insight on processed data are:
   * Tableau
   * Qlikview
-* Data Exporting
-  * Many times processed data gets exported to RDBMS or No-SQL database, for which sqoop is getting used 
+* Data Exporting - Many times processed data gets exported to RDBMS or No-SQL database
+  * Sqoop 
 
 ### What is Sqoop?
 * Sqoop is a tool designed to transfer data between Hadoop and relational database servers. 
