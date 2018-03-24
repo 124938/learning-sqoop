@@ -1,6 +1,6 @@
 ## Introduction
 
-### Typical life cycle of data processing in hadoop world
+### Typical Life Cycle of data processing in Hadoop
 * Data Ingestion - Few most popular tools used to ingest data from different sources to hadoop file system (HDFS) are:
   * Sqoop
   * Flume
