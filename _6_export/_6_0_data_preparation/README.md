@@ -1,6 +1,6 @@
-## Prepare data to be exported
+## Sqoop export - Preparation
 
-### Pre-Requisite
+### Data Preparation on HDFS side
 
 * **Create database in Hive**
 
