@@ -54,7 +54,12 @@ mysql> describe orders_daily_revenue;
 2 rows in set (0.00 sec)
 ~~~
 
-### Usage of --export-dir, --input-fields-terminated-by
+### Usage of --export-dir, --table, --input-fields-terminated-by & --num-mappers
+
+* **Important Notes:**
+  * --export-dir & --table is mandatory parameters while exporting data from HDFS to RDBMS
+  * Default value of --input-fields-terminated-by is comma (",")
+  * Default value of --num-mappers is 4  
 
 * **Export orders_daily_revenue table from HDFS to RDBMS**
 
