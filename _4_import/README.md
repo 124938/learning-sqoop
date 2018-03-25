@@ -7,19 +7,7 @@
   
   ![Alt text](_images/sqoop_import_life_cycle.png?raw=true "Sqoop Import - Life Cycle")  
 
-### Pre-Requisite
-
-* **Login to Quick Start VM OR Gateway Node of hadoop cluster**
-
-~~~
-asus@asus-GL553VD:~$ ssh cloudera@192.168.211.142
-cloudera@192.168.211.142's password: 
-Last login: Wed Jan  3 02:59:27 2018 from 192.168.211.1
-
-[cloudera@quickstart ~]$
-~~~
-
-* **Syntax**
+### Syntax
 
 ~~~
 [cloudera@quickstart ~]$ sqoop import --help
@@ -413,7 +401,7 @@ Arguments to mysqldump and other subprograms may be supplied
 after a '--' on the command line.
 ~~~
 
-* **Create parent directory under HDFS**
+### Create parent directory under HDFS
 
 ~~~
 [cloudera@quickstart ~]$ hadoop fs -mkdir -p /user/cloudera/sqoop_import/retail_db

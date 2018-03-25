@@ -1,11 +1,11 @@
 ## Examples - Import data (Using Compression)
 
-### Important Notes:
-* gzip is default compression technique
-
 ### Usage of --compress (Gzip)
 
-* Import order_items table data from MySQL to HDFS in text file using gzip format 
+* **Important Notes:**
+  * gzip is default compression technique
+
+* **Import order_items table data from MySQL to HDFS in text file using gzip format**
 
 ~~~
 [cloudera@quickstart ~]$ sqoop-import \
@@ -94,13 +94,13 @@ Note: Recompile with -Xlint:deprecation for details.
 18/03/10 21:24:28 INFO mapreduce.ImportJobBase: Retrieved 172198 records.
 ~~~
 
-* Verify map reduce job
+* **Verify map reduce job**
 
 ~~~
 http://quickstart.cloudera:8088/proxy/application_1514521302404_0037/
 ~~~
 
-* Verify order_items data under HDFS
+* **Verify order_items data under HDFS**
 
 ~~~
 [cloudera@quickstart ~]$ hadoop fs -ls -h -R /user/cloudera/sqoop_import/retail_db/order_items
@@ -111,7 +111,7 @@ http://quickstart.cloudera:8088/proxy/application_1514521302404_0037/
 
 ### Usage of --compress & --compression-codec (Snappy)
 
-* Import order_items table data from MySQL to HDFS in text file using snappy format 
+* **Import order_items table data from MySQL to HDFS in text file using snappy format**
 
 ~~~
 [cloudera@quickstart ~]$ sqoop-import \
@@ -201,13 +201,13 @@ Note: Recompile with -Xlint:deprecation for details.
 18/03/10 21:46:52 INFO mapreduce.ImportJobBase: Retrieved 172198 records.
 ~~~
 
-* Verify map reduce job
+* **Verify map reduce job**
 
 ~~~
 http://quickstart.cloudera:8088/proxy/application_1514521302404_0039/
 ~~~
 
-* Verify order_items data under HDFS
+* **Verify order_items data under HDFS**
 
 ~~~
 [cloudera@quickstart ~]$ hadoop fs -ls -h -R /user/cloudera/sqoop_import/retail_db/order_items
@@ -218,7 +218,7 @@ http://quickstart.cloudera:8088/proxy/application_1514521302404_0039/
 
 ### Usage of --compress & --compression-codec (bzip)
 
-* Import order_items table data from MySQL to HDFS in text file using bzip format 
+* **Import order_items table data from MySQL to HDFS in text file using bzip format**
 
 ~~~
 [cloudera@quickstart ~]$ sqoop-import \
@@ -308,13 +308,13 @@ Note: Recompile with -Xlint:deprecation for details.
 18/03/10 21:50:07 INFO mapreduce.ImportJobBase: Retrieved 172198 records.
 ~~~
 
-* Verify map reduce job
+* **Verify map reduce job**
 
 ~~~
 http://quickstart.cloudera:8088/proxy/application_1514521302404_0040/
 ~~~
 
-* Verify order_items data under HDFS
+* **Verify order_items data under HDFS**
 
 ~~~
 [cloudera@quickstart ~]$ hadoop fs -ls -h -R /user/cloudera/sqoop_import/retail_db/order_items
@@ -325,7 +325,7 @@ http://quickstart.cloudera:8088/proxy/application_1514521302404_0040/
 
 ### Usage of --compress & --compression-codec (deflate)
 
-* Import order_items table data from MySQL to HDFS in text file using deflat format 
+* **Import order_items table data from MySQL to HDFS in text file using deflat format**
 
 ~~~
 [cloudera@quickstart ~]$ sqoop-import \
@@ -415,13 +415,13 @@ Note: Recompile with -Xlint:deprecation for details.
 18/03/10 21:54:16 INFO mapreduce.ImportJobBase: Retrieved 172198 records.
 ~~~
 
-* Verify map reduce job
+* **Verify map reduce job**
 
 ~~~
 http://quickstart.cloudera:8088/proxy/application_1514521302404_0041/
 ~~~
 
-* Verify order_items data under HDFS
+* **Verify order_items data under HDFS**
 
 ~~~
 [cloudera@quickstart ~]$ hadoop fs -ls -h -R /user/cloudera/sqoop_import/retail_db/order_items

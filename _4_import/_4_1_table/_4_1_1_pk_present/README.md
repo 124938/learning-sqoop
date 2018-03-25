@@ -2,10 +2,10 @@
 
 ### Usage of --target-dir
 
-* Notes:
+* **Important Notes:**
   * --target-dir should work only in case of directory is not available in HDFS
 
-* Import orders table from MySQL to HDFS
+* **Import orders table from MySQL to HDFS**
 
 ~~~
 [cloudera@quickstart ~]$ sqoop-import \
@@ -91,13 +91,13 @@ Note: Recompile with -Xlint:deprecation for details.
 18/03/04 04:39:12 INFO mapreduce.ImportJobBase: Retrieved 68883 records.
 ~~~
 
-* Verify map reduce job
+* **Verify map reduce job**
 
 ~~~
 http://quickstart.cloudera:8088/proxy/application_1514521302404_0010/
 ~~~
 
-* Verify orders data under HDFS
+* **Verify orders data under HDFS**
 
 ~~~
 [cloudera@quickstart ~]$ hadoop fs -ls -R /user/cloudera/sqoop_import/retail_db/orders
@@ -111,10 +111,10 @@ http://quickstart.cloudera:8088/proxy/application_1514521302404_0010/
 
 ### Usage of --target-dir with --delete-target-dir
 
-* Notes:
+* **Important Notes:**
   * --delete-target-dir make sure to delete --target-dir under HDFS before importing table data
 
-* Import orders table from MySQL to HDFS
+* **Import orders table from MySQL to HDFS**
 
 ~~~
 [cloudera@quickstart ~]$ sqoop-import \
@@ -202,13 +202,13 @@ Note: Recompile with -Xlint:deprecation for details.
 18/03/04 04:47:44 INFO mapreduce.ImportJobBase: Retrieved 68883 records.
 ~~~
 
-* Verify map reduce job
+* **Verify map reduce job**
 
 ~~~
 http://quickstart.cloudera:8088/proxy/application_1514521302404_0011/
 ~~~
 
-* Verify orders data under HDFS
+* **Verify orders data under HDFS**
 
 ~~~
 [cloudera@quickstart ~]$ hadoop fs -ls -R /user/cloudera/sqoop_import/retail_db/orders
@@ -222,17 +222,17 @@ http://quickstart.cloudera:8088/proxy/application_1514521302404_0011/
 
 ### Usage of --warehouse-dir
 
-* Notes:
+* **Important Notes:**
   * --warehouse-dir make sure to create directory under HDFS with name provided in --table clause
 
-* Remove orders directory from HDFS
+* **Remove orders directory from HDFS**
 
 ~~~
 [cloudera@quickstart ~]$ hadoop fs -rm -R /user/cloudera/sqoop_import/retail_db/orders
 Deleted /user/cloudera/sqoop_import/retail_db/orders
 ~~~
 
-* Import orders table from MySQL to HDFS
+* **Import orders table from MySQL to HDFS**
 
 ~~~
 [cloudera@quickstart ~]$ sqoop-import \
@@ -319,13 +319,13 @@ Note: Recompile with -Xlint:deprecation for details.
 18/03/04 05:20:45 INFO mapreduce.ImportJobBase: Retrieved 68883 records.
 ~~~
 
-* Verify map reduce job
+* **Verify map reduce job**
 
 ~~~
 http://quickstart.cloudera:8088/proxy/application_1514521302404_0013/
 ~~~
 
-* Verify orders data under HDFS
+* **Verify orders data under HDFS**
 
 ~~~
 [cloudera@quickstart ~]$ hadoop fs -ls -R /user/cloudera/sqoop_import/retail_db/orders
@@ -339,17 +339,17 @@ http://quickstart.cloudera:8088/proxy/application_1514521302404_0013/
 
 ### Usage of --num-mappers
 
-* Notes:
+* **Important Notes:**
   * Import command generate 4 files under HDFS because default value of --num-mappers is 4, this can be override by specifying --num-mappers value in command 
 
-* Remove orders directory from HDFS
+* **Remove orders directory from HDFS**
 
 ~~~
 [cloudera@quickstart ~]$ hadoop fs -rm -R /user/cloudera/sqoop_import/retail_db/orders
 Deleted /user/cloudera/sqoop_import/retail_db/orders
 ~~~
 
-* Import orders table from MySQL to HDFS
+* **Import orders table from MySQL to HDFS**
 
 ~~~
 [cloudera@quickstart ~]$ sqoop-import \
@@ -431,13 +431,13 @@ Note: Recompile with -Xlint:deprecation for details.
 18/03/04 05:39:44 INFO mapreduce.ImportJobBase: Retrieved 68883 records.
 ~~~
 
-* Verify map reduce job
+* **Verify map reduce job**
 
 ~~~
 http://quickstart.cloudera:8088/proxy/application_1514521302404_0014/
 ~~~
 
-* Verify orders data under HDFS
+* **Verify orders data under HDFS**
 
 ~~~
 [cloudera@quickstart ~]$ hadoop fs -ls -h -R /user/cloudera/sqoop_import/retail_db/orders

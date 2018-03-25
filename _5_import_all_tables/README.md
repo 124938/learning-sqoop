@@ -3,19 +3,7 @@
 ### Objective
 * Sqoop import all tables tool imports data of all tables from RDBMS to HDFS.
 
-### Pre-Requisite
-
-* **Login to Quick Start VM OR Gateway Node of hadoop cluster**
-
-~~~
-asus@asus-GL553VD:~$ ssh cloudera@192.168.211.142
-cloudera@192.168.211.142's password: 
-Last login: Wed Jan  3 02:59:27 2018 from 192.168.211.1
-
-[cloudera@quickstart ~]$
-~~~
-
-* **Syntax**
+### Syntax
 
 ~~~
 Warning: /usr/lib/sqoop/../accumulo does not exist! Accumulo imports will fail.
@@ -282,14 +270,14 @@ after a '--' on the command line.
 
 ## Examples
 
-### Important Notes:
-* Does not support many control aruments like --table, --query, --split-by, --where, --cols etc. i.e. filtering, transformation is not possible
-* As few tables may not have primary key present, better to use --autoreset-to-one-mapper  
-* --warehouse-dir is mandatory
-
 ### Usage of --import-all-tables
 
-* Import all table from MySQL to HDFS
+* **Important Notes:**
+  * Does not support many control aruments like --table, --query, --split-by, --where, --cols etc. i.e. filtering, transformation is not possible
+  * As few tables may not have primary key present, better to use --autoreset-to-one-mapper  
+  * --warehouse-dir is mandatory
+
+* **Import all table from MySQL to HDFS**
 
 ~~~
 [cloudera@quickstart ~]$ sqoop-import-all-tables \
@@ -860,7 +848,7 @@ Note: Recompile with -Xlint:deprecation for details.
 18/03/11 06:33:47 INFO mapreduce.ImportJobBase: Retrieved 1345 records.
 ~~~
 
-* Verify all tables under HDFS
+* **Verify all tables under HDFS**
 
 ~~~
 [cloudera@quickstart ~]$ hadoop fs -ls -h -R /user/cloudera/sqoop_import_all_tables/retail_db

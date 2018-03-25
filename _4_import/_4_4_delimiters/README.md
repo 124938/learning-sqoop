@@ -2,7 +2,7 @@
 
 ### Pre-Requisite
 
-* Login to mysql
+* **Login to mysql**
 
 ~~~
 [cloudera@quickstart ~]$ mysql -h quickstart.cloudera -u retail_dba -p
@@ -26,7 +26,7 @@ You can turn off this feature to get a quicker startup with -A
 Database changed
 ~~~
 
-* Create table with primary key
+* **Create table with primary key**
 
 ~~~
 mysql> create table emp(
@@ -70,11 +70,11 @@ Bye
 
 ### Usage of --fields-terminated-by, --lines-terminated-by, --null-string & --null-non-string
 
-* Note:
+* **Important Notes:**
   * Default value of --fields-terminated-by is comma (i.e. ,)
   * Default value of --lines-terminated-by is new line character (i.e. \n)
 
-* Import emp table data using specified delimiter from MySQL to HDFS 
+* **Import emp table data using specified delimiter from MySQL to HDFS**
 
 ~~~
 [cloudera@quickstart ~]$ sqoop-import \
@@ -160,13 +160,13 @@ Note: Recompile with -Xlint:deprecation for details.
 18/03/10 07:04:34 INFO mapreduce.ImportJobBase: Retrieved 4 records.
 ~~~
 
-* Verify map reduce job
+* **Verify map reduce job**
 
 ~~~
 http://quickstart.cloudera:8088/proxy/application_1514521302404_0029/
 ~~~
 
-* Verify emp data under HDFS
+* **Verify emp data under HDFS**
 
 ~~~
 [cloudera@quickstart ~]$ hadoop fs -ls -h -R /user/cloudera/sqoop_import/retail_db/emp
@@ -181,7 +181,7 @@ http://quickstart.cloudera:8088/proxy/application_1514521302404_0029/
 
 ### Usage of --fields-terminated-by, --lines-terminated-by, --null-string & --null-non-string
 
-* Import emp table data using specified delimiter from MySQL to HDFS 
+* **Import emp table data using specified delimiter from MySQL to HDFS**
 
 ~~~
 [cloudera@quickstart ~]$ sqoop-import \
@@ -269,13 +269,13 @@ Note: Recompile with -Xlint:deprecation for details.
 18/03/10 07:19:00 INFO mapreduce.ImportJobBase: Retrieved 4 records.
 ~~~
 
-* Verify map reduce job
+* **Verify map reduce job**
 
 ~~~
 http://quickstart.cloudera:8088/proxy/application_1514521302404_0032/
 ~~~
 
-* Verify emp data under HDFS
+* **Verify emp data under HDFS**
 
 ~~~
 [cloudera@quickstart ~]$ hadoop fs -ls -h -R /user/cloudera/sqoop_import/retail_db/emp

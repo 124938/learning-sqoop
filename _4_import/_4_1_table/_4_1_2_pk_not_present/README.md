@@ -2,7 +2,7 @@
 
 ### Pre-Requisite
 
-* Login to mysql
+* **Login to mysql**
 
 ~~~
 [cloudera@quickstart ~]$ mysql -h quickstart.cloudera -u retail_dba -p
@@ -26,7 +26,7 @@ You can turn off this feature to get a quicker startup with -A
 Database changed
 ~~~
 
-* Create table without primary key
+* **Create table without primary key**
 
 ~~~
 mysql> create table order_items_nopk as select * from order_items;
@@ -49,7 +49,7 @@ mysql> describe order_items_nopk;
 
 ### Sample import of table which does not contain primary key
 
-* Import order_items_nopk table from MySQL to HDFS
+* **Import order_items_nopk table from MySQL to HDFS**
 
 ~~~
 [cloudera@quickstart ~]$ sqoop-import \
@@ -78,7 +78,7 @@ Note: Recompile with -Xlint:deprecation for details.
 18/03/04 06:09:57 ERROR tool.ImportTool: Import failed: No primary key could be found for table order_items_nopk. Please specify one with --split-by or perform a sequential import with '-m 1'.
 ~~~
 
-* Notes:
+* **Important Notes:**
   * Above command is getting failed due to primary key is not present on table
   * Possible Solutions:
     * Use --num-mappers 1 in above command
@@ -86,12 +86,12 @@ Note: Recompile with -Xlint:deprecation for details.
 
 ### Usage of --split-by (for numeric field)
 
-* Notes:
+* **Important Notes:**
   * Value specified in --split-by column should be sequence generated OR evenly incremented
   * Value specified in --split-by column should not contain null values
   * Column specified in --split-by column should be indexed at DB level else importing data may have performance impact
 
-* Import order_items_nopk table from MySQL to HDFS
+* **Import order_items_nopk table from MySQL to HDFS**
 
 ~~~
 [cloudera@quickstart ~]$ sqoop-import \
@@ -177,13 +177,13 @@ Note: Recompile with -Xlint:deprecation for details.
 18/03/04 06:36:42 INFO mapreduce.ImportJobBase: Retrieved 172198 records.
 ~~~
 
-* Verify map reduce job
+* **Verify map reduce job**
 
 ~~~
 http://quickstart.cloudera:8088/proxy/application_1514521302404_0016/
 ~~~
 
-* Verify order_items_nopk data under HDFS
+* **Verify order_items_nopk data under HDFS**
 
 ~~~
 [cloudera@quickstart ~]$ hadoop fs -ls -h -R /user/cloudera/sqoop_import/retail_db/order_items_nopk
@@ -197,7 +197,7 @@ http://quickstart.cloudera:8088/proxy/application_1514521302404_0016/
 
 ### Usage of --split-by (for non-numeric field)
 
-* Import orders table from MySQL to HDFS (using order_status column as --split-by field)
+* **Import orders table from MySQL to HDFS (using order_status column as --split-by field)**
 
 ~~~
 [cloudera@quickstart ~]$ sqoop-import \
@@ -287,13 +287,13 @@ Note: Recompile with -Xlint:deprecation for details.
 18/03/04 07:05:08 INFO mapreduce.ImportJobBase: Retrieved 68883 records.
 ~~~
 
-* Verify map reduce job
+* **Verify map reduce job**
 
 ~~~
 http://quickstart.cloudera:8088/proxy/application_1514521302404_0017/
 ~~~
 
-* Verify orders_non_numeric data under HDFS
+* **Verify orders_non_numeric data under HDFS**
 
 ~~~
 [cloudera@quickstart ~]$ hadoop fs -ls -h -R /user/cloudera/sqoop_import/retail_db/orders_non_numeric
@@ -319,10 +319,10 @@ http://quickstart.cloudera:8088/proxy/application_1514521302404_0017/
 
 ### Usage of --autoreset-to-one-mapper
 
-* Notes:
+* **Important Notes:**
   * --autoreset-to-one-mapper is equal to --num-mappers 1 i.e. it will automatically reset number of mapper to 1, in case of table does not contain primary key 
 
-* Import order_items_nopk table from MySQL to HDFS
+* **Import order_items_nopk table from MySQL to HDFS**
 
 ~~~
 [cloudera@quickstart ~]$ sqoop-import \
@@ -407,13 +407,13 @@ Note: Recompile with -Xlint:deprecation for details.
 18/03/04 07:13:57 INFO mapreduce.ImportJobBase: Retrieved 172198 records.
 ~~~
 
-* Verify map reduce job
+* **Verify map reduce job**
 
 ~~~
 http://quickstart.cloudera:8088/proxy/application_1514521302404_0018/
 ~~~
 
-* Verify order_items_nopk data under HDFS
+* **Verify order_items_nopk data under HDFS**
 
 ~~~
 [cloudera@quickstart ~]$ hadoop fs -ls -h -R /user/cloudera/sqoop_import/retail_db/order_items_nopk

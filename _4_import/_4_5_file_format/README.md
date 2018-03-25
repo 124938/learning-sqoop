@@ -1,11 +1,11 @@
 ## Examples - Import data (Using different file format)
 
-### Important Notes:
-* Text is default file format while importing data
-
 ### Usage of --as-textfile
 
-* Import order_items table data from MySQL to HDFS in text file format 
+* **Important Notes:**
+  * Text is default file format while importing data
+
+* **Import order_items table data from MySQL to HDFS in text file format**
 
 ~~~
 [cloudera@quickstart ~]$ sqoop-import \
@@ -93,13 +93,13 @@ Note: Recompile with -Xlint:deprecation for details.
 18/03/10 08:14:11 INFO mapreduce.ImportJobBase: Retrieved 172198 records.
 ~~~
 
-* Verify map reduce job
+* **Verify map reduce job**
 
 ~~~
 http://quickstart.cloudera:8088/proxy/application_1514521302404_0034/
 ~~~
 
-* Verify order_items data under HDFS
+* **Verify order_items data under HDFS**
 
 ~~~
 [cloudera@quickstart ~]$ hadoop fs -ls -h -R /user/cloudera/sqoop_import/retail_db/order_items
@@ -121,7 +121,7 @@ http://quickstart.cloudera:8088/proxy/application_1514521302404_0034/
 
 ### Usage of --as-sequencefile
 
-* Import order_items table data from MySQL to HDFS in sequence file format 
+* **Import order_items table data from MySQL to HDFS in sequence file format**
 
 ~~~
 [cloudera@quickstart ~]$ sqoop-import \
@@ -211,13 +211,13 @@ Note: Recompile with -Xlint:deprecation for details.
 
 ~~~
 
-* Verify map reduce job
+* **Verify map reduce job**
 
 ~~~
 http://quickstart.cloudera:8088/proxy/application_1514521302404_0035/
 ~~~
 
-* Verify order_items data under HDFS
+* **Verify order_items data under HDFS**
 
 ~~~
 [cloudera@quickstart ~]$ hadoop fs -ls -h -R /user/cloudera/sqoop_import/retail_db/order_items
@@ -258,7 +258,7 @@ Caused by: java.lang.ClassNotFoundException: Class order_items not found
 
 ### Usage of --as-avrodatafile
 
-* Import order_items table data from MySQL to HDFS in avro file format 
+* **Import order_items table data from MySQL to HDFS in avro file format**
 
 ~~~
 [cloudera@quickstart ~]$ sqoop-import \
@@ -349,13 +349,13 @@ Note: Recompile with -Xlint:deprecation for details.
 18/03/10 08:40:20 INFO mapreduce.ImportJobBase: Retrieved 172198 records.
 ~~~
 
-* Verify map reduce job
+* **Verify map reduce job**
 
 ~~~
 http://quickstart.cloudera:8088/proxy/application_1514521302404_0036/
 ~~~
 
-* Verify order_items data under HDFS
+* **Verify order_items data under HDFS**
 
 ~~~
 [cloudera@quickstart ~]$ hadoop fs -ls -h -R /user/cloudera/sqoop_import/retail_db/order_items
@@ -431,7 +431,7 @@ log4j:WARN See http://logging.apache.org/log4j/1.2/faq.html#noconfig for more in
 
 ### Usage of --as-parquetfile
 
-* Import order_items table data from MySQL to HDFS in parquet file format 
+* **Import order_items table data from MySQL to HDFS in parquet file format**
 
 ~~~
 [cloudera@quickstart ~]$ sqoop-import \
@@ -522,13 +522,13 @@ Note: Recompile with -Xlint:deprecation for details.
 18/03/10 08:46:45 INFO mapreduce.ImportJobBase: Retrieved 172198 records.
 ~~~
 
-* Verify map reduce job
+* **Verify map reduce job**
 
 ~~~
 http://quickstart.cloudera:8088/proxy/application_1514521302404_0037/
 ~~~
 
-* Verify order_items data under HDFS
+* **Verify order_items data under HDFS**
 
 ~~~
 [cloudera@quickstart ~]$ hadoop fs -ls -h -R /user/cloudera/sqoop_import/retail_db/order_items

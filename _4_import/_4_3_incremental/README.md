@@ -2,7 +2,7 @@
 
 ### Approach -> 1 : Usage of --table with --where & --append
 
-* Import orders table with `Jan 2014` data from MySQL to HDFS 
+* **Import orders table with `Jan 2014` data from MySQL to HDFS**
 
 ~~~
 [cloudera@quickstart ~]$ sqoop-import \
@@ -89,13 +89,13 @@ Note: Recompile with -Xlint:deprecation for details.
 18/03/10 04:43:52 INFO util.AppendUtils: Creating missing output directory - orders
 ~~~
 
-* Verify map reduce job
+* **Verify map reduce job**
 
 ~~~
 http://quickstart.cloudera:8088/proxy/application_1514521302404_0026/
 ~~~
 
-* Verify orders data under HDFS
+* **Verify orders data under HDFS**
 
 ~~~
 [cloudera@quickstart ~]$ hadoop fs -ls -h -R /user/cloudera/sqoop_import/retail_db/orders
@@ -105,7 +105,7 @@ http://quickstart.cloudera:8088/proxy/application_1514521302404_0026/
 
 ### Approach -> 2 : Usage of --query with --split-by & --append
 
-* Import orders table with `Feb 2014` data from MySQL to HDFS 
+* **Import orders table with `Feb 2014` data from MySQL to HDFS**
 
 ~~~
 [cloudera@quickstart ~]$ sqoop-import \
@@ -192,13 +192,13 @@ Note: Recompile with -Xlint:deprecation for details.
 18/03/10 04:51:15 INFO util.AppendUtils: Using found partition 2
 ~~~
 
-* Verify map reduce job
+* **Verify map reduce job**
 
 ~~~
 http://quickstart.cloudera:8088/proxy/application_1514521302404_0027/
 ~~~
 
-* Verify orders data under HDFS
+* **Verify orders data under HDFS**
 
 ~~~
 [cloudera@quickstart ~]$ hadoop fs -ls -h -R /user/cloudera/sqoop_import/retail_db/orders
@@ -213,7 +213,7 @@ http://quickstart.cloudera:8088/proxy/application_1514521302404_0027/
 * **Important Notes:**
   * --incremental append means only new records will get imported to HDFS
 
-* Import orders table with greater then `28-Feb-2014` data from MySQL to HDFS 
+* **Import orders table with greater then `28-Feb-2014` data from MySQL to HDFS**
 
 ~~~
 [cloudera@quickstart ~]$ sqoop-import \
@@ -312,13 +312,13 @@ Note: Recompile with -Xlint:deprecation for details.
 18/03/10 05:31:06 INFO tool.ImportTool: (Consider saving this with 'sqoop job --create')
 ~~~
 
-* Verify map reduce job
+* **Verify map reduce job**
 
 ~~~
 http://quickstart.cloudera:8088/proxy/application_1514521302404_0028/
 ~~~
 
-* Verify orders data under HDFS
+* **Verify orders data under HDFS**
 
 ~~~
 [cloudera@quickstart ~]$ hadoop fs -ls -h -R /user/cloudera/sqoop_import/retail_db/orders
@@ -384,7 +384,7 @@ mysql> select * from ticker;
 +----+------+-------+---------------------+
 ~~~
 
-* Import ticker table with greater then `2018-01-03 00:00:00` data from MySQL to HDFS 
+* **Import ticker table with greater then `2018-01-03 00:00:00` data from MySQL to HDFS** 
 
 ~~~
 [cloudera@quickstart ~]$ sqoop-import \
@@ -560,7 +560,7 @@ Note: Recompile with -Xlint:deprecation for details.
 18/03/11 07:57:54 INFO tool.ImportTool: (Consider saving this with 'sqoop job --create')
 ~~~
 
-* Verify ticker data under HDFS
+* **Verify ticker data under HDFS**
 
 ~~~
 [cloudera@quickstart ~]$ hadoop fs -ls /user/cloudera/sqoop_import/retail_db/ticker

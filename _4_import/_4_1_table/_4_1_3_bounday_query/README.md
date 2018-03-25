@@ -1,12 +1,12 @@
 ## Examples - Import data from table (Custom Bondary Query & Columns)
 
-### Important Notes:
-* --boundary-query is useful in case of filtering data from source table
-* --boundary-query must return two columns
-
 ### Approach -> 1 : Usage of --boundary-query
 
-* Import order_items table from MySQL to HDFS using custom bondary query
+* **Important Notes:**
+  * --boundary-query is useful in case of filtering data from source table
+  * --boundary-query must return two columns
+
+* **Import order_items table from MySQL to HDFS using custom bondary query**
 
 ~~~
 [cloudera@quickstart ~]$ sqoop-import \
@@ -96,13 +96,13 @@ Note: Recompile with -Xlint:deprecation for details.
 18/03/04 07:41:42 INFO mapreduce.ImportJobBase: Retrieved 72199 records.
 ~~~
 
-* Verify map reduce job
+* **Verify map reduce job**
 
 ~~~
 http://quickstart.cloudera:8088/proxy/application_1514521302404_0019/
 ~~~
 
-* Verify order_items data under HDFS
+* **Verify order_items data under HDFS**
 
 ~~~
 [cloudera@quickstart ~]$ hadoop fs -ls -h -R /user/cloudera/sqoop_import/retail_db/order_items
@@ -116,7 +116,7 @@ http://quickstart.cloudera:8088/proxy/application_1514521302404_0019/
 
 ### Approach -> 2 : Usage of --boundary-query
 
-* Import order_items table from MySQL to HDFS using custom bondary query
+* **Import order_items table from MySQL to HDFS using custom bondary query**
 
 ~~~
 [cloudera@quickstart ~]$ sqoop-import \
@@ -207,13 +207,13 @@ Note: Recompile with -Xlint:deprecation for details.
 18/03/04 07:47:42 INFO mapreduce.ImportJobBase: Retrieved 72199 records.
 ~~~
 
-* Verify map reduce job
+* **Verify map reduce job**
 
 ~~~
 http://quickstart.cloudera:8088/proxy/application_1514521302404_0020/
 ~~~
 
-* Verify order_items data under HDFS
+* **Verify order_items data under HDFS**
 
 ~~~
 [cloudera@quickstart ~]$ hadoop fs -ls -h -R /user/cloudera/sqoop_import/retail_db/order_items
@@ -226,7 +226,7 @@ http://quickstart.cloudera:8088/proxy/application_1514521302404_0020/
 
 ### Usage of --columns
 
-* Import order_items table from MySQL to HDFS by specific columns
+* **Import order_items table from MySQL to HDFS by specific columns**
 
 ~~~
 [cloudera@quickstart ~]$ sqoop-import \
@@ -315,13 +315,13 @@ Note: Recompile with -Xlint:deprecation for details.
 18/03/09 21:59:44 INFO mapreduce.ImportJobBase: Retrieved 172198 records.
 ~~~
 
-* Verify map reduce job
+* **Verify map reduce job**
 
 ~~~
 http://quickstart.cloudera:8088/proxy/application_1514521302404_0020/
 ~~~
 
-* Verify order_items data under HDFS
+* **Verify order_items data under HDFS**
 
 ~~~
 [cloudera@quickstart ~]$ hadoop fs -ls -h -R /user/cloudera/sqoop_import/retail_db/order_items 

@@ -1,11 +1,5 @@
 ## Examples - Import data (Using Query instead of table)
 
-### Important Notes:
-* --query is getting used while importing data from multiple tables by applying transformation & filtering logic 
-* --query is mutually exclusive with --table and/or --columns
-* --query usage with --split-by is mandatory in case of --num-mappers is > 1
-* --query must have a placefolder called \$CONDITIONS
-
 ### Sample import using query
 
 ~~~
@@ -28,7 +22,13 @@ Try --help for usage instructions.
 
 ### Usage of --query
 
-* Import order_items table from MySQL to HDFS using custom bondary query
+* **Important Notes:**
+  * --query is getting used while importing data from multiple tables by applying transformation & filtering logic 
+  * --query is mutually exclusive with --table and/or --columns
+  * --query usage with --split-by is mandatory in case of --num-mappers is > 1
+  * --query must have a placefolder called \$CONDITIONS
+
+* **Import order_items table from MySQL to HDFS using custom bondary query**
 
 ~~~
 [cloudera@quickstart ~]$ sqoop-import \
@@ -113,13 +113,13 @@ Note: Recompile with -Xlint:deprecation for details.
 18/03/09 22:55:22 INFO mapreduce.ImportJobBase: Retrieved 18965 records.
 ~~~
 
-* Verify map reduce job
+* **Verify map reduce job**
 
 ~~~
 http://quickstart.cloudera:8088/proxy/application_1514521302404_0024/
 ~~~
 
-* Verify order_items data under HDFS
+* **Verify order_items data under HDFS**
 
 ~~~
 [cloudera@quickstart ~]$ hadoop fs -ls -h -R /user/cloudera/sqoop_import/retail_db/order_revenue

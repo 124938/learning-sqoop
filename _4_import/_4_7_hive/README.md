@@ -1,11 +1,8 @@
 ## Examples - Import data into Hive
 
-### Important Notes:
-* Importing data from RDBMS to external hive table is not supported
-
 ### Pre-Requisite
 
-* Create database in Hive
+* **Create database in Hive**
 
 ~~~
 [cloudera@quickstart ~]$ hive
@@ -28,7 +25,7 @@ hive> use retail_db_sqoop_import;
 OK
 ~~~
 
-* Verify database on HDFS
+* **Verify database on HDFS**
 
 ~~~
 [cloudera@quickstart ~]$ hadoop fs -ls -R /user/hive/
@@ -38,7 +35,10 @@ drwxrwxrwx   - cloudera supergroup          0 2018-03-11 04:09 /user/hive/wareho
 
 ### Usage of --hive-import, --hive-database, --hive-table (Hive table does not exist)
 
-* Import orders table from MySQL to Hive
+* **Important Notes:**
+  * Importing data from RDBMS to external hive table is not supported
+
+* **Import orders table from MySQL to Hive**
 
 ~~~
 [cloudera@quickstart ~]$ sqoop-import \
@@ -138,13 +138,13 @@ OK
 Time taken: 0.782 seconds
 ~~~
 
-* Verify map reduce job
+* **Verify map reduce job**
 
 ~~~
 http://quickstart.cloudera:8088/proxy/application_1514521302404_0042/
 ~~~
 
-* Verify orders data under Hive
+* **Verify orders data under Hive**
 
 ~~~
 [cloudera@quickstart ~]$ hive
@@ -184,7 +184,7 @@ OK
 68883
 ~~~
 
-* Verify orders data under HDFS
+* **Verify orders data under HDFS**
 
 ~~~
 [cloudera@quickstart ~]$ hadoop fs -ls -h -R /user/hive/warehouse/retail_db_sqoop_import.db
@@ -196,7 +196,7 @@ drwxrwxrwx   - cloudera supergroup          0 2018-03-11 04:23 /user/hive/wareho
 
 ### Usage of --hive-import, --hive-database, --hive-table & --create-hive-table (Hive table is already exist)
 
-* Import orders table from MySQL to Hive 
+* **Import orders table from MySQL to Hive**
 
 ~~~
 [cloudera@quickstart ~]$ sqoop-import \
@@ -294,7 +294,7 @@ FAILED: Execution Error, return code 1 from org.apache.hadoop.hive.ql.exec.DDLTa
 
 ### Usage of --hive-import, --hive-database, --hive-table & --hive-overwrite (Overwrite data in existing hive table)
 
-* Import orders table from MySQL to Hive
+* **Import orders table from MySQL to Hive**
 
 ~~~
 [cloudera@quickstart ~]$ sqoop-import \
@@ -396,13 +396,13 @@ OK
 Time taken: 0.631 seconds
 ~~~
 
-* Verify map reduce job
+* **Verify map reduce job**
 
 ~~~
 http://quickstart.cloudera:8088/proxy/application_1514521302404_0045/
 ~~~
 
-* Verify orders data under Hive
+* **Verify orders data under Hive**
 
 ~~~
 [cloudera@quickstart ~]$ hive
@@ -455,7 +455,7 @@ OK
 68883
 ~~~
 
-* Verify orders data under HDFS
+* **Verify orders data under HDFS**
 
 ~~~
 [cloudera@quickstart ~]$ hadoop fs -ls -h -R /user/hive/warehouse/retail_db_sqoop_import.db
@@ -467,7 +467,7 @@ drwxrwxrwx   - cloudera cloudera          0 2018-03-11 04:33 /user/hive/warehous
 
 ### Usage of --hive-import, --hive-database, --hive-table (Hive table is already exist)
 
-* Create emp table in hive
+* **Create emp table in hive**
 
 ~~~
 hive> create table emp(
@@ -515,7 +515,7 @@ Storage Desc Params:
     serialization.format    1                   
 ~~~
 
-* Import emp table data from RDBMS to existing hive table
+* **Import emp table data from RDBMS to existing hive table**
 
 ~~~
 [cloudera@quickstart ~]$ sqoop-import \
@@ -611,7 +611,7 @@ OK
 Time taken: 0.553 seconds
 ~~~
 
-* Verify emp table data in Hive
+* **Verify emp table data in Hive**
 
 ~~~
 [cloudera@quickstart ~]$ hive
