@@ -2,7 +2,7 @@
 
 ### Pre-Requisite
 
-* **Create orders_daily_revenue table**
+* **Create orders_daily_revenue table under MySQL**
 
 ~~~
 mysql> drop table if exists orders_daily_revenue;
@@ -129,7 +129,7 @@ Note: Recompile with -Xlint:deprecation for details.
 http://quickstart.cloudera:8088/proxy/application_1514521302404_0072/
 ~~~
 
-* **Verify orders_daily_revenue table in MySQL**
+* **Verify orders_daily_revenue table under MySQL**
 
 ~~~
 mysql> select * from orders_daily_revenue;

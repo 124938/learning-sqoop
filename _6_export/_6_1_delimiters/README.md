@@ -2,40 +2,7 @@
 
 ### Pre-Requisite
 
-* **Login to MySQL**
-
-~~~
-[cloudera@quickstart ~]$ mysql -h quickstart.cloudera -P 3306 -u retail_dba -p
-Enter password: 
-Welcome to the MySQL monitor.  Commands end with ; or \g.
-Your MySQL connection id is 472
-Server version: 5.1.73 Source distribution
-
-Copyright (c) 2000, 2013, Oracle and/or its affiliates. All rights reserved.
-
-Oracle is a registered trademark of Oracle Corporation and/or its
-affiliates. Other names may be trademarks of their respective
-owners.
-
-Type 'help;' or '\h' for help. Type '\c' to clear the current input statement.
-
-mysql> show databases;
-+--------------------+
-| Database           |
-+--------------------+
-| information_schema |
-| retail_db          |
-+--------------------+
-2 rows in set (0.00 sec)
-
-mysql> use retail_db;
-Reading table information for completion of table and column names
-You can turn off this feature to get a quicker startup with -A
-
-Database changed
-~~~
-
-* **Create orders_daily_revenue table**
+* **Create orders_daily_revenue table under MySQL**
 
 ~~~
 mysql> create table orders_daily_revenue(
@@ -144,7 +111,7 @@ Note: Recompile with -Xlint:deprecation for details.
 18/03/25 08:10:38 INFO mapreduce.ExportJobBase: Exported 7 records.
 ~~~
 
-* **Verify orders_daily_revenue table in MySQL**
+* **Verify orders_daily_revenue table under MySQL**
 
 ~~~
 mysql> select * from orders_daily_revenue;
