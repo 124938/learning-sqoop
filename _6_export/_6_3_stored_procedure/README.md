@@ -42,6 +42,10 @@ mysql> delimiter ;
 
 ### Usage of --call
 
+* **Important Notes:**
+  * --call is getting used to execute stored procedure & fields available in HDFS file should get matched with input parameters of stored procedure
+  * --table and --call are mutually exclusive parameter
+
 * **Export orders_daily_revenue table from HDFS to RDBMS (Using --call)**
 
 ~~~
