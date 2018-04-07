@@ -129,3 +129,38 @@ Sqoop 1.4.6-cdh5.12.0
 git commit id 
 Compiled by jenkins on Thu Jun 29 04:30:40 PDT 2017
 ~~~
+
+### Step-5: Verification of MySQL
+
+~~~
+[cloudera@quickstart ~]$ mysql -h quickstart.cloudera -P 3306 -u retail_dba -p
+Enter password: 
+Welcome to the MySQL monitor.  Commands end with ; or \g.
+Your MySQL connection id is 472
+Server version: 5.1.73 Source distribution
+
+Copyright (c) 2000, 2013, Oracle and/or its affiliates. All rights reserved.
+
+Oracle is a registered trademark of Oracle Corporation and/or its
+affiliates. Other names may be trademarks of their respective
+owners.
+
+Type 'help;' or '\h' for help. Type '\c' to clear the current input statement.
+
+mysql> show databases;
++--------------------+
+| Database           |
++--------------------+
+| information_schema |
+| retail_db          |
++--------------------+
+2 rows in set (0.00 sec)
+
+mysql> use retail_db;
+Reading table information for completion of table and column names
+You can turn off this feature to get a quicker startup with -A
+
+Database changed
+~~~
+
+
