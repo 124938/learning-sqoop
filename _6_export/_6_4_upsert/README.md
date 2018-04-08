@@ -24,7 +24,7 @@ mysql> describe orders_daily_revenue;
 2 rows in set (0.00 sec)
 ~~~
 
-### Need of UPSERT
+### Issue with table contains primary key - Need of UPSERT
 
 * **Export orders_daily_revenue table from HDFS to RDBMS - First Time**
 
@@ -200,7 +200,7 @@ Export job failed!
 	at org.apache.sqoop.Sqoop.main(Sqoop.java:252)
 ~~~
 
-### Usage of --update-key & --update-mode
+### Usage of --update-key & --update-mode as updateonly 
 
 * **Important Notes:**
   * --update-key is used to update existing data
@@ -346,7 +346,7 @@ mysql> select * from orders_daily_revenue;
 7 rows in set (0.00 sec)
 ~~~
 
-* **(1) : Export orders_daily_revenue table from HDFS to RDBMS (Using default update mode i.e. updateonly)**
+* **Export orders_daily_revenue table from HDFS to RDBMS (Using default update mode i.e. updateonly)**
 
 ~~~
 [cloudera@quickstart ~]$ sqoop-export \
@@ -484,7 +484,9 @@ mysql> select * from orders_daily_revenue;
 7 rows in set (0.00 sec)
 ~~~
 
-* **(2) : Export orders_daily_revenue table from HDFS to RDBMS (Using allowinsert update mode)**
+### Usage of --update-key & --update-mode as allowinsert 
+
+* **Export orders_daily_revenue table from HDFS to RDBMS (Using allowinsert update mode)**
 
 ~~~
 [cloudera@quickstart ~]$ sqoop-export \
