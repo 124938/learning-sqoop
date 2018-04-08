@@ -247,7 +247,7 @@ mysql> select count(*) from orders_daily_revenue;
 * **Result:**
   * Only few records are exported from HDFS to RDBMS i.e. records are exported partially which means consistency is not getting maintained 
 
-### Usage of --staging-table & --clear-staging-table - Fail Run
+### Usage of --staging-table & --clear-staging-table - Fail Run by maintaining data consistency
 
 * **Important Notes:**
   * --staging-table  attributes comes into picture to maintain data consistency i.e. everything should be exported or nothing should be exported
@@ -503,7 +503,7 @@ mysql> select * from orders_daily_revenue;
 1 row in set (0.00 sec)
 ~~~
 
-### Usage of --staging-table & --clear-staging-table - Successful Run
+### Usage of --staging-table & --clear-staging-table - Successful Run by maintaining data consistency
 
 * **Truncate orders_daily_revenue table under MySQL**
 
