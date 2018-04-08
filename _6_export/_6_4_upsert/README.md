@@ -448,6 +448,8 @@ mysql> select * from orders_daily_revenue;
 7 rows in set (0.00 sec)
 ~~~
 
+### Usage of --update-key & --update-mode as allowinsert 
+
 * **Update existing data of orders_daily_revenue table under MySQL**
 
 ~~~
@@ -483,8 +485,6 @@ mysql> select * from orders_daily_revenue;
 +-----------------------+---------+
 7 rows in set (0.00 sec)
 ~~~
-
-### Usage of --update-key & --update-mode as allowinsert 
 
 * **Export orders_daily_revenue table from HDFS to RDBMS (Using allowinsert update mode)**
 
